@@ -1,21 +1,41 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
   }
-  
-  body {
-    width: 100%;
-    min-height: 100vh;
+
+body{
+    background: linear-gradient(45deg,pink,violet);
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #d9a6a6;
-  }
-  
-  .container {
+}
+
+  .fa-heart {
+    color: rgb(60, 0, 60);
+    font-size: 25px;
+    position: absolute;
+    animation:  heartMove linear 1;
+    top: -10vh;
+    z-index: 0;
+}
+
+@keyframes heartMove {
+    0%{
+        transform: translateY(-10vh) ;
+    }
+    100%{
+        transform: translateY(110vh) ;
+    }
+}
+
+.container {
     display: flex;
     flex-direction: column;
     text-align: center;
