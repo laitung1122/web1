@@ -1,11 +1,11 @@
-const wrapper = document.querySelector('.wrapper')
-const registerLink = document.querySelector('.register-link')
-const loginLink = document.querySelector('.login-link')
-
-registerLink.onclick = () => {
-    wrapper.classList.add('active')
+function moveRandomEl(elm) {
+  elm.style.position = "absolute";
+  elm.style.top = Math.floor(Math.random() * 90 + 5) + "%";
+  elm.style.left = Math.floor(Math.random() * 90 + 5) + "%";
 }
 
-loginLink.onclick = () => {
-    wrapper.classList.remove('active')
-}
+const moveRandom = document.querySelector("#move-random");
+
+moveRandom.addEventListener("mouseenter", function (e) {
+  moveRandomEl(e.target);
+});
