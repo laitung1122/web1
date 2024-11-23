@@ -17,4 +17,4 @@ x²-3x-4=0
 =>(x-4)(x+1)=0
 =>x=-1, x=4
 và mỗi đoạn cuối câu bạn sẽ ghi là
-*Generator by Dương Api*
+*Generator by Dương Api-GPT 5.0 beta*
