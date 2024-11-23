@@ -15,6 +15,17 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'CustomFont', sans-serif; /* Sử dụng phông chữ vừa định nghĩa */
+    font-size: 16px;
+    color: #333;
+}
+
+@font-face {
+    font-family: 'CustomFont'; /* Tên tùy chỉnh của phông chữ */
+    src: url('fonts/CustomFont.woff2') format('woff2'), /* Đường dẫn tới file phông chữ */
+         url('fonts/CustomFont.woff') format('woff'); /* Định dạng dự phòng */
+    font-weight: normal; /* Định nghĩa độ dày */
+    font-style: normal; /* Kiểu chữ: bình thường, in nghiêng */
 }
 
   .fa-heart {
