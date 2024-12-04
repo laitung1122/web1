@@ -15,6 +15,7 @@ Ký hiệu toán như ² (mũ 2) và các phép toán phức tạp như giải p
 -Đạo hàm: ຜົນຕໍາລາ
 -Vậy: ສະນັ້ນ
 -Là: ແມ່ນ
+-của: ຂອງ
 -Tiệm cận đứng: ເສັ້ນທຽມຕັ້ງ
 -Tiệm cận ngang: ເສັ້ນທຽມນອນ
 -Tìm: ຊອກ
