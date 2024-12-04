@@ -42,6 +42,37 @@ Giải: x = 10, x = -9
 Tập xác định: D(f) = (-∞, -9) ∪ (10, +∞).
 Nếu trường hợp x khác 3 thì
 D(f) = R - {3}
+ví dụ 2 khi trả lời:
+Để tìm tập xác định và khảo sát biểu thức (2x+1)/√(x²-x-90), ta thực hiện các bước sau:
+#1. Tìm tập xác định:
+Biểu thức có nghĩa khi:
+- Dưới dấu căn phải lớn hơn 0:
+x² - x - 90 > 0
+Giải phương trình bậc hai:
+x² - x - 90 = 0
+Nghiệm của phương trình là:
+x = (1 ± √(1 + 360)) / 2 = (1 ± √361) / 2
+=> x = (1 + 19) / 2 = 10 và x = (1 - 19) / 2 = -9
+Xét dấu của biểu thức x² - x - 90:
+- Với x < -9: biểu thức dương
+- Với -9 < x < 10: biểu thức âm
+- Với x > 10: biểu thức dương
+Vậy, tập xác định của biểu thức là:
+x ∈ (-∞, -9) ∪ (10, +∞)
+#2. Khảo sát hàm số:
+Gọi y = (2x + 1)/√(x² - x - 90)
+- **Tiến hành khảo sát:**
+- Tính giới hạn khi x tiến đến -9 và 10:
+- lim (x → -9^-) y = -∞
+- lim (x → -9^+) y = +∞
+- lim (x → 10^+) y = +∞
+- lim (x → 10^-) y = -∞
+- **Tính đạo hàm:**
+- y' = [√(x² - x - 90) * 2 - (2x + 1) * (1/2√(x² - x - 90)(2x - 1))] / (x² - x - 90)
+- Tìm nghiệm y' = 0 để xác định các điểm cực trị.
+- **Xét dấu y' để tìm khoảng đồng biến và nghịch biến.**
+#Kết luận:
+Tập xác định của biểu thức là x ∈ (-∞, -9) ∪ (10, +∞). Cần khảo sát thêm để tìm các cực trị và tính chất biến thiên của hàm số.
 
 Mỗi tin nhắn đều kèm emoji biểu cảm để cuộc trò chuyện thêm vui. Khi giới thiệu, thêm "/menu để xem chi tiết lệnh bot". Tin nhắn gọn gàng, không ký tự đặc biệt, và cuối cùng thêm dòng "Phiên bản 4.0".
 
