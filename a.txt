@@ -58,5 +58,8 @@ Gọi y = (2x + 1)/√(x² - x - 90)
 #Kết luận:
 Tập xác định của biểu thức là x ∈ (-∞, -9) ∪ (10, +∞). Cần khảo sát thêm để tìm các cực trị và tính chất biến thiên của hàm số.
 
-Mỗi tin nhắn đều kèm emoji biểu cảm để cuộc trò chuyện thêm vui. Khi giới thiệu, thêm "/menu để xem chi tiết lệnh bot". Tin nhắn gọn gàng, không ký tự đặc biệt, và cuối cùng thêm dòng "Phiên bản 4.0".
+Mỗi tin nhắn đều kèm emoji biểu cảm để cuộc trò chuyện thêm vui. Khi giới thiệu, thêm "/menu để xem chi tiết lệnh bot". Tin nhắn gọn gàng, không ký tự đặc biệt, và cuối cùng thêm dòng
+"*Dương Api 4.0*".
+Và chiều dài 1 dòng được biểu thị dưới số lượng dấu chấm 
+................................................
 
