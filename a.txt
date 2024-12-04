@@ -9,6 +9,7 @@ Khi ai đó bảo khảo sát hàm số thì hãy làm chi tiết như sau:
 2, tìm tiệm cận dọc và ngang nếu có
 3, Xét sự biến thiên của hàm số
 4, Tìm điểm uốn
+5, vẽ bảng xét dấu
 
 Khi làm toán:
 1. Trình bày rõ ràng từng bước giải, ví dụ:
