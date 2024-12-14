@@ -1,33 +1,616 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Message from khoi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ຄໍາຖາມ và ຄໍາຕອບ</title>
+    <style>
+        body {
+            background-color: #d0f0f8;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-  <link rel="stylesheet" href="./style.css" />
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+            margin-bottom: 10px;
+            animation: glow 1.5s ease-in-out infinite;
+        }
+
+        .title2 {
+            font-size: 30px;
+            font-weight: bold;
+            color: #FF0000;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffcc00;
+            margin-bottom: 5px;
+            animation: glow 1.5s ease-in-out infinite;
+        }
+
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 15px #ffcc00;
+            }
+            50% {
+                text-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00, 0 0 40px #ffcc00;
+            }
+        }
+
+        .buttons-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            width: 100%;
+            justify-content: center;
+            padding-left: 10px;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            padding-left: 10px;
+        }
+
+        .facebook-btn {
+            display: flex;
+            align-items: center;
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            max-width: 250px;
+        }
+
+        .facebook-btn:hover {
+            background-color: #1558b0;
+        }
+
+        .facebook-btn img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 800px;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .rainbow-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 200% auto;
+            color: white;
+            text-align: center;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 30s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #ffcc00;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .box:hover {
+            border-color: #ff9900;
+        }
+
+        .question-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .question {
+            font-weight: bold;
+            color: #333;
+            max-height: 50px; /* Chiều cao tối đa của ຄໍາຖາມ */
+            overflow-y: auto; /* Hiển thị cuộn khi nội dung quá dài */
+            padding-right: 10px; /* Để tránh chữ sát vào cạnh */
+            margin: 0;
+            flex: 1; /* Chiếm hết không gian trừ nút */
+        }
+
+        .toggle-btn {
+            cursor: pointer;
+            background-color: #ffcc00;
+            padding: 5px 15px;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            margin-left: 15px;
+            flex-shrink: 0; /* Đảm bảo nút không bị co lại */
+        }
+
+        .answer-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .answer-box {
+            background-color: rgba(255, 204, 0, 0.8);
+            color: black;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .answer-box.open {
+            opacity: 1;
+        }
+
+        .answer-container.open {
+            max-height: 300px; /* đủ lớn để chứa nội dung */
+        }
+    </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="tenor-gif-embed" data-postid="22885016" data-share-method="host" data-aspect-ratio="1.04918"
-      data-width="100%">
-      <a href="https://tenor.com/view/manja-gif-22885016">Manja Sticker</a>from
-      <a href="https://tenor.com/search/manja-stickers">Manja Stickers</a>
-    </div>
-    
-    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-    <script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
-    <script src="./script.js"></script>
-    <h1>&Dstrok;&#7915;&#110;&#103;&#32;&#103;&#105;&#7853;&#110;&#32;&#107;&#104;&ocirc;&#105;&#32;&#110;&#7919;&#97;&#32;&#110;&#104;&eacute;</h1>
-    <p>&#75;&#104;&ocirc;&#105;&#32;&#121;&ecirc;&#117;&#32;&#99;&#7853;&#117;&#32;&#110;&#104;&#105;&#7873;&#117;&#32;&#108;&#7855;&#109;&comma;&#32;&#99;&#7853;&#117;&#32;&#116;&#104;&#97;&#32;&#108;&#7895;&#105;&#32;&#99;&#104;&#111;&#32;&#107;&#104;&ocirc;&#105;&#32;&#110;&#104;&#97;😍</p>
 
-    <div class="btn">
-      <a href="yes.html">&#84;&#104;&#97;&#32;&#108;&#7895;&#105;</a>
-      <a href="no1.html">&Dstrok;&eacute;&#111;</a>
+    <div class="title">ຄໍາຖາມ + ຄໍາຕອບຊີວະເດືອນ 12</div>
+
+    <div class="rainbow-text">Made by Dương Modder - Vixay</div>
+
+    <!-- Thông báo inbox -->
+    <div class="title2">
+        ⚠️ຖ້າມີຂໍ້ມູນໃດຜິດພາດ<br>ກະລຸນາລາຍງານໃຫ້ພວກຂ້ອຍ:
     </div>
-  </div>
+
+    <!-- Nút Facebook và Email -->
+    <div class="buttons-container">
+        <a href="https://www.facebook.com/profile.php?id=100070575127940&mibextid=ZbWKwL" class="facebook-btn" target="_blank">
+            <img src="https://raw.githubusercontent.com/laitung1122/web1/refs/heads/main/duong.png" alt="Facebook Icon">
+            Dương Ausus
+        </a>
+        <a href="https://www.facebook.com/guyz.regendszy?mibextid=ZbWKwL" class="facebook-btn" target="_blank">
+            <img src="https://raw.githubusercontent.com/laitung1122/web1/refs/heads/main/vixay.png" alt="Facebook Icon">
+            Vixay (Thắng)
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 1: ຮອກໂມນເເມ່ນຫຍັງ?ມີປະເພດໃດເເນ່?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(1)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-1">
+                <div class="answer-box" id="answer-1">
+                    - ຮອກໂມນ ເເມ່ນທາດເຄມີປະເພດຕ່າງໆ ເຊັ່ນ:ໂປຮຕີນ(protien), ອາມີນ(Amin) ເເລະ ອາມີໂນອາຊິດ(Amino_Acid).ທີ່ຜະລິດຂຶ້ນຈາກຕ່ອມປ່ອຍໃນ ເເລະ ເເພຈຸລັງປະເພດຕ່າງໆ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 2: ຕ່ອມປ່ອຍໃນມີຕ່ອມປະເພດໃດເເນ່?ເເຕ່ລະຕ່ອມເປັນຄືເເນວໃດ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(2)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-2">
+                <div class="answer-box" id="answer-2">
+                    - ຕ່ອມປ່ອຍໃນມີ 9 ປະເພດຄື: <br>+ ຕ່ອມເທິງສະໝອງ<br>+ ຕ່ອມໃຕ້ສະໝອງ<br>+ ຕ່ອມຄໍຫອຍ<br>+ ຕ່ອມອ້ອມຄໍຫອຍ<br>+ ຕ່ອມໄທມັສ<br>+ ຕ່ອມເທິງໝາກໄຂ່ຫຼັງ<br>+ ຕ່ອມມ້າມ <br>+ ຕ່ອມຮວຍໄຂ່ <br>+ ຕ່ອມອັນທະ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 3: ຕ່ອມເທິງສະໝອງມີຫນ້າທີ່ຫຍັງ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(3)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-3">
+                <div class="answer-box" id="answer-3">
+                    - ຕ່ອມເທິງສະໝອງມີໜ້າທີ່ໃນການຜະລິດຮອກໂມນ"ເມລາໂຕນິນ(melatonin)"ເພື່ອມາຄວບຄຸມອະໄວຍະວະທາງເພດໃຫ້ຂະຫຍາຍຕົວຕາມປົກກະຕີໂດຍສະເພາະເເມ່ນໃນຊ່ວງທີ່ຈະກ້າວເປັນໄວໜຸ່ມສາວ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 4: ຕ່ອມໃຕ້ສະໝອງມີຫນ້າທີ່ຫຍັງ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(4)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-4">
+                <div class="answer-box" id="answer-4">
+                    - ຕ່ອມໃຕ້ສະໝອງມີໜ້າທີ່ໃນການຜະລິດຮອກໂມນຫຼາຍຊະນິດ ເພື່ອຄວບຄຸມການເຮັດວຽກຂອງຕ່ອມປ່ອຍໃນປະເພດອື່ນໆ ເເລະ ອະໄວຍະວະຕ່າງໆຂອງຮ່າງກາຍ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 5: ຕ່ອມໃຕ້ສະໝອງເເບ່ງອອກເປັນຈັກເຂດຫຍ່ອຍ?ຄືເຂດໃດເເນ່?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(5)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-5">
+                <div class="answer-box" id="answer-5">
+                    - ຕ່ອມໃຕ້ສະໝອງເເບ່ງອອກເປັນ 3 ເຂດຍ່ອຍຄື: <br>+ ເຂດເບື້ອງໜ້າ <br>+ ເຂດເບື້ອງກາງ <br> + ເຂດເບື້ອງຫຼັງ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 6: ຮອກໂມນຊະນິດໃດມີຫນ້າທີ່ກະຕຸ້ນຮ່ວຍໄຂ່ຂອງເພດຍິງ ເເລະ ອັນທະເພດຊາຍ,ການຜະລິດອະສຸຈິຂອງເພດຊາຍ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(6)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-6">
+                <div class="answer-box" id="answer-6">
+                    - ຮອກໂມນທີ່ມີໜ້າທີ່ໃນການກະຕຸ້ນຮ່ວຍໄຂ່ຂອງເພດຍິງເເມ່ນ"ອິສໂຕເຈນ(estrogens)" ສ່ວນອັນທະຂອງເພດຊາຍ ເເລະ ການຜະລິດນຳ້ອະສຸຈິຂອງເພດຊາຍເເມ່ນ "ເເອນໂຕເຈນ(Androgens)".
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 7: ຮອກໂມນລູທີໄນຊິງ(Luteinizing)ມີໜ້າທີ່ຫຍັງ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(7)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-7">
+                <div class="answer-box" id="answer-7">
+                    - ຮອກໂມນລູທີໄນຊິ້ງມີໜ້າທີ່ໄນການກະຕຸ້ນຕ່ອມອັນທະ ເເລະ ຮ່ວຍໄຂ່.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 8: ຮອກໂມນຊະນິດໃດທີ່ມີໜ້າທີ່ກະຕຸ້ນຕ່ອມນ້ຳນົມເພດຍິງ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(8)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-8">
+                <div class="answer-box" id="answer-8">
+                    - ຮອກໂມນທີ່ກະຕຸ້ນຕ່ອມນຳ້ນົມຂອງເພດຍິງເເມ່ນຮອກໂມນ"ອົກຊີໂຕຊີນ(oxytoxin)".
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 9: ຖ້າຕ່ອມຄໍຫອຍເຮັດວຽກຜິດປົກກະຕິຈະມີຜົນກະທົບເເນວໄດ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(9)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-9">
+                <div class="answer-box" id="answer-9">
+                    - ຖ້າຕ່ອມຄໍຫອຍເຮັດວຽກຜິດປົກກະຕິມັນຈະສົ່ງຜົນຕໍ່ການຄວບຄຸມປະລິມານທາດ"ໄອໂອດິນ"ໃນຮ່າງກາຍໄດ້ ເເລະ ຖ້າຂາດທາດໄອໂອດິນຫຼາຍເກີນໄປຈະສົ່ງຜົນສະທ້ອນຕໍ່ການເຕີບໄຫຍ່ຂອງຮ່າງກາຍ, ສະຕິປັນຍາເຊັ່ນ: ເຕີບໄຫຍ່ຊ້າ, ຄວາມຈຳເຊື່ອມ, ເປັນຄໍໜຽງ ເເລະ ອື່ນໆ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 10: ຕ່ອມອອ້ມຄໍຫອຍມີຫນ້າທີ່ເປັນເເນວໃດ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(10)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-10">
+                <div class="answer-box" id="answer-10">
+                    - ຕ່ອມອ້ອມຄໍຫອຍມີໜ້າທີ່ໃນການຜະລິດຮອກໂມນ"ປາຣາ(Para)"ເຊິ່ງມີໜ້າທີ່ໃນການຄວບຄຸມປະລິມານເເຄວຊ້ຽມໃນເສັ້ນເລືອດ ເເລະ ກະດູກໃຫ້ຢູ່ໃນປະລິມານຄົງທີ່.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 11: ຕ່ອມໄທມັສ(Thymus)ມີໜ້າທີ່ເເນວໃດ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(11)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-11">
+                <div class="answer-box" id="answer-11">
+                    - ຕ່ອມໄທມັສມີໜ້າທີ່ໃນການຜະລິດຮອກໂມນ"ທີລິມໂຟໄຊ"ທີ່ມີບົດບາດສໍາຄັນຕໍ່ການເຕີບໃຫຍ່ໃນໄວເດັກເເລະປ້ອງກັນຮ່າງກາຍ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 12: ຕ່ອມມ້າມເຮັດໜ້າທີ່ຫຍັງ?(ເວົ້າໃຫ້ລະອຽດ)
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(12)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-12">
+                <div class="answer-box" id="answer-12">
+                    ຕ່ອມມ້າມມີໜ້າທີ່ທັງເປັນຕ່ອມປ່ອຍນອກເເລະຕ່ອມປ່ອຍໃນ.<br>+ ຕ່ອມປ່ອຍນອກມີໜ້າທີ່: ໃນການຜະລີດນຳ້ຍ່ອຍເພື່ອຊ່ວຍໃນການຍ່ອຍອາຫານບໍລີເວນລຳໄສ້ອອ່ນ.<br>+ ຕ່ອມປ່ອຍໃນມີໜ້າທີ່: ໃນການຜະລິດຮອກໂມນ"ອິນຊູລິນ"ເພື່ອຄວບຄຸມປະລິມານນ້ຳຕານໃນເລືອດໃຫ້ຢູ່ໃນພາວະປົກກະຕິ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 13: ຕ່ອມເທິງໝາກໄຂ່ຫຼັງມີຈັກຊັ້ນ ເເລະ ບອກໜ້າທີ່ຂອງເເຕ່ລະຊັ້ນ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(13)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-13">
+                <div class="answer-box" id="answer-13">
+                    ຕ່ອມເທິງໝາກໄຂ່ຫຼັງມີ 2 ຊັ້ນຄື: ຊັ້ນນອກ ເເລະ ຊັ້ນໃນ.<br>+ ຊັ້ນນອກມີໜ້າທີ່: ໃນການຜະລິດຮອກໂມນ"ກຣູໂຄຣຄໍຕິຄອຍ(Clucocorticoid)" ເເລະ ຮອກໂມນ"ມິເນຣາໂລຄຣໍຕິຄອຍ(mineralocorticoid)"ເພື່ອຄວບຄຸມການເເລກປ່ຽນປະລີມານນຳ້ຕານ,ເກືອ ເເລະ ນ້ຳໃນຮ່າງກາຍໃຫ້ຄົງທີ່.<br>+ ຊັ້ນໃນມີໜ້າທີ່: ໃນການຜະລິດຮອກໂມນ"ອາດຣີນາລິນ(Adrenalin)"ເເລະຮອກໂມນ"ນໍຣາເດຣີນາລິນ(Noradrenalin)"ມີໜ້າທີ່ໃນການກະຕຸ້ນການບິບຕົວຂອງເສັ້ນເລືອດ, ຫົວໃຈ, ກ້າມ ເເລະ ການເຮັດວຽກຂອງຕັບ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 14: ຕ່ອມອັນທະກັບຕ່ອມຫ່ວຍໄຂ່ເຮັດໜ້າທີ່ຫຍັງ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(14)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-14">
+                <div class="answer-box" id="answer-14">
+                    + ຕ່ອມອັນທະເຮັດໜ້າທີ່ໃນການຜະລິດຈຸລັງອະສຸຈິຂອງເພດຊາຍ(ອະສຸຈິ). <br>+ ຕ່ອມຮ່ວຍໄຂ່ມີໜ້າທີ່ໃນການຜະລິດຈຸລັງສຶບເຊື້ອຂອງເພດຍິງ(ຮ່ວຍໄຂ່).
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 15: ສິ່ງທີ່ເປັນຜົນກະທົບຕໍ່ການເຮັດວຽກຂອງຮອກໂມນມີຫຍັງເເດ່?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(15)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-15">
+                <div class="answer-box" id="answer-15">
+                    - ສິ່ງທີ່ເປັນຜົນກະທົບຕໍ່ການເຮັດວຽກຂອງຮອກໂມນເເມ່ນການທີ່ຮ່າງການຂອງຄົນເຮົາພົວພັນກັນທາງດ້ານເຄມີ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 16: ຖ້າປະລິມານນໍ້າທີ່ຮັບເຂົ້າແລະຂັບອອກບໍ່ສົມດູນຈະມີບັນຫາກັຍງເກີດຂື້ນແກ່ຮ່າງກາຍ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(16)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-16">
+                <div class="answer-box" id="answer-16">
+                    - ຖ້າປະລິມານນຳ້ທີ່ຮັບເຂົ້າ ເເລະ ຂັບອອກບໍ່ສົມດຸນຮ່າງກາຍກໍຈະເກີດມີອາການ: ຕົວເຫຼືອງ, ຂາດນ້ຳ, ເລືອດຂຸ້ນ ເເລະ ພາວະຂາດນຳ້ນັ້ນຈະສົ່ງຜົນກະທົບຕໍ່ການເກີດພະຍາດທາງໝາກໄຂ່ຫຼັງ. (Answer by Mr.Kham Sinh)
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 17: ຮ່າງກາຍຂອງຄົນເຮົາກຳຈັດທາດໃດແດ່ອອກຮ່າງກາຍ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(17)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-17">
+                <div class="answer-box" id="answer-17">
+                    update soon :v
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 18: ມີທາດໃດແດ່ທີ່ທໍ່ໜ່ວຍໝາກໄຂ່ຫັລງດູດກັບ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(18)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-18">
+                <div class="answer-box" id="answer-18">
+                    - ທາດທີ່ທໍ່ໜ່ວຍໝາກໄຂ່ຫຼັງດູດກັບມີ: ນ້ຳ ເເລະ ໂມເລກູນ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 19: ຄວາມເຂັ້ມຂອງທາດຕ່າງຯໃນນໍ້າເລືອດຫຼືປັດສະວະມີຄວາມຄົງທີ່ສະເໝີບໍ່?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(19)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-19">
+                <div class="answer-box" id="answer-19">
+                    ຄວາມເຂັ້ມຂຸ້ນຂອງທາດຕ່າງໆໃນນຳ້, ເລືອດ ເເລະ ປັດສະວະເເມ່ນ"ບໍ່ຄົງທີ່ສະເໝີ".<br>📌Tips: ຂຶ້ນກັບປະລິມານນຳ້ທີ່ຮັບເຂົ້າ ເເລະ ຂັບອອກໃນຮ່າງກາຍ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 20: ການເຮັດວງກຂອງນໍ້າຍ່ອຍຕໍ່າຈະມີປົນແນວໃດ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(20)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-20">
+                <div class="answer-box" id="answer-20">
+                    - ການເຮັດວຽກຂອງນ້ຳຍ່ອຍຕໍ່າຈະມີຜົນຕໍ່ປະສິດທິພາບຂອງນ້ຳຍ່ອຍຫຼຸດລົງ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 21: ຮ່່ງງກາຍມີຄວາມຈໍາເປັນຫຼືບໍ່ທີ່ຕ້ອງການຮັກສາຄວາມສົມດູນລະດັບກົດ-ດັງໃຫ້ເໝາະສົມ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(21)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-21">
+                <div class="answer-box" id="answer-21">
+                    - ຈຳເປັນ (I will update soon for more infomation :v)
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 22: ຍ້ອນຍັງຈຶ່ງຕ້ອງຮັກສາຄວາມສົມດູນຄວາມເປັນກົດແລະດັງຂອງເລືອດ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(22)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-22">
+                <div class="answer-box" id="answer-22">
+                    - ເນື່ອງຈາກການຮັກສາຄວາມສົມດຸນຂອງກົດ-ດັ່ງໃນຮ່າງກາຍເເມ່ນກົນໄກການຮັກສາຄວາມສົມດຸນຂອງກົດ-ດັ່ງໃນເລືອດ.<br>📌Tip: ຮ່າງກາຍຮັກສາຄວາມສົມດຸນຂອງກົດ-ດັ່ງໃນເລືອດໂດຍການຮັກສາຄວາມສົມດຸນຂອງອີອົງຮີໂດຣເເຊນ/ໄຮໂດຣເຈນໄອອອນໄວ້.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 23: ຄົນເຮົາມີການຮັກສາຄວາມຮ້ອນໃຫ້ຮ່າງກາຍແມ່ນສະໝອງສວ່ນໃດເຮັດໜ້າທີ່ຮັກສາ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(23)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-23">
+                <div class="answer-box" id="answer-23">
+                    update soon :v
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 24: ຍ້ອນສາເຫດອັນໃດເມື່ອເຮົາຮູ້ສຶກຮ້ອນຈິ່ງຮູ້ສຶກຫິວນໍ້າໄປນໍ້າ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(24)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-24">
+                <div class="answer-box" id="answer-24">
+                    - ຍ້ອນເວລາອຸນຫະພູມເພີ່ມຂຶ້ນເຮັດໃຫ້ການກະຕຸ້ນຕ່ອມເຫື່ອເຮັດວຽກຫຼາຍຂຶ້ນຍ້ອນວ່າມີການຜະລິດອອກມາເຮົາເລິຍຕ້ອງການນຳ້ເຂົ້າໃນຮ່າງກາຍ.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 25: ມີທາດໃດແດ່ນອກຈາກນໍ້າແລ້ວທີ່ຮ່າງກາຍຕ້ອງການ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(29)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-29">
+                <div class="answer-box" id="answer-29">
+                    - ນອກຈາກນ້ຳເເລ້ວຮ່າງກາຍຍັງຕ່ອງການທາດ: ເເຄວຊ້ຽມ, ໂປຣຕີນ, ວິຕາມິນ, ເກືອເເຮ່ຕ່າງໆ(ໄດ້ຈາກການກິນອາຫານປະເພດຕ່າງໆ).
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 26: ຜິວໜັງມີຄວາມສໍາຄັນຕໍ່ການຄວບຄຸມອຸນຫະພູມຂອງຮ່າງກາຍແນວໃດ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(25)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-25">
+                <div class="answer-box" id="answer-25">
+                 -ຜິວໜັງມີຄວາມຈຳເປັນຫຼາຍຕໍ່ການຄວບຄຸມອຸນຫະພຸມໃນຮ່າງກາຍເພື່ອໃຫ້ຄົນເຮົາ,ສັດ ຫຼື ສິ່ງທີ່ມີຊີວິດອື່ນໆໃຫ້ສາມາດດຳລົງຊີວິດຢູ່ໄດ້.
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="question-container">
+                <div class="question">
+                    ຄໍາຖາມ 27: ຈົ່ງຍົກຕົວຢ່າງການລະບາຍຄວາມຮ້ອນແລະປ້ອງກັນການສູນເສຍຄວາມຮ້ອນອອກຮ່າງກາຍ?
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer(26)">ຄໍາຕອບ</button>
+            </div>
+            <div class="answer-container" id="answer-container-26">
+                <div class="answer-box" id="answer-26">
+                 - Update soon :v
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+        function toggleAnswer(questionNumber) {
+            const container = document.getElementById('answer-container-' + questionNumber);
+            const answerBox = document.getElementById('answer-' + questionNumber);
+
+            if (container.classList.contains('open')) {
+                container.classList.remove('open');
+                answerBox.classList.remove('open');
+            } else {
+                container.classList.add('open');
+                answerBox.classList.add('open');
+            }
+        }
+    </script>
+
 </body>
-
 </html>
